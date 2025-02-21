@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol IFixtureKeyEventRepository{
+protocol IFixtureKeyEventRepository:Actor{
     func getEventsByfixture(fixture:Int)async throws -> [FixtureKeyEventsData]
 }
 
