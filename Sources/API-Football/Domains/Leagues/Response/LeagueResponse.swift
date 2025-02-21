@@ -12,7 +12,7 @@
 import Foundation
 
 // MARK: - LeaguesResponse
-struct LeaguesResponse: Codable {
+struct LeaguesResponse: Codable,Sendable {
     let response: [LeagueData]
 
     enum CodingKeys: String, CodingKey {
@@ -21,10 +21,10 @@ struct LeaguesResponse: Codable {
 }
 
 // MARK: - Response
-struct LeagueData: Codable {
-    let league: LeagueDetailsData
-    let country: Country
-    let seasons: [Season]
+public struct LeagueData: Codable, Sendable{
+    public let league: LeagueDetailsData
+    public let country: Country
+    public let seasons: [Season]
 
     enum CodingKeys: String, CodingKey {
         case league = "league"
@@ -34,24 +34,30 @@ struct LeagueData: Codable {
 }
 
 // MARK: - Country
-struct Country: Codable {
-    let name: String
-    let code: String?
-    let flag: String?
+public struct Country: Codable, Sendable {
+    public let name: String
+    public let code: String?
+    public let flag: String?
 
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case code = "code"
         case flag = "flag"
     }
+    
+    public init(name: String, code: String?, flag: String?) {
+        self.name = name
+        self.code = code
+        self.flag = flag
+    }
 }
 
 // MARK: - League
-struct LeagueDetailsData: Codable {
-    let id: Int
-    let name: String
-    let type: TypeEnum
-    let logo: String
+public struct LeagueDetailsData: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let type: TypeEnum
+    public let logo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -61,16 +67,16 @@ struct LeagueDetailsData: Codable {
     }
 }
 
-enum TypeEnum: String, Codable {
+public enum TypeEnum: String, Codable, Sendable {
     case cup = "Cup"
     case league = "League"
 }
 
 // MARK: - Season
-struct Season: Codable {
-    let year: Int
-    let start: String
-    let end: String
+public struct Season: Codable, Sendable {
+    public let year: Int
+    public let start: String
+    public let end: String
 
     enum CodingKeys: String, CodingKey {
         case year = "year"

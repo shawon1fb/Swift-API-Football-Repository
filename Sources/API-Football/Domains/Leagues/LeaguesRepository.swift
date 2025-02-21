@@ -9,7 +9,7 @@ import Foundation
 import EasyXConnect
 
 
-protocol ILeaguesRepository: Actor{
+public protocol ILeaguesRepository: Actor{
     
     func getLeagueById(id:Int)async throws -> LeagueData
 }
