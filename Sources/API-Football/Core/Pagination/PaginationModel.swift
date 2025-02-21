@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct PaginationModel<T : Sendable>:Sendable {
-    var page: Int
-    var totalPages: Int
-    var list: [T]
+public struct PaginationModel<T : Sendable>:Sendable {
+    public var page: Int
+    public var totalPages: Int
+    public var list: [T]
     
     var nextPage: Int {
         if page == 0 {

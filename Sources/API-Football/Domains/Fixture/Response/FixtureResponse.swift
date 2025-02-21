@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - FixtureResponse
-struct FixtureResponse: Codable {
+struct FixtureResponse: Codable, Sendable {
 
   let paging: Paging
   let response: [FixtureDataResponse]
@@ -20,19 +20,19 @@ struct FixtureResponse: Codable {
 }
 
 // MARK: - Paging
-struct Paging: Codable {
-  let current, total: Int
+public struct Paging: Codable, Sendable {
+    public  let current, total: Int
 }
 
 // MARK: - Response
-struct FixtureDataResponse: Codable, Hashable, Equatable {
-  let fixture: Fixture
-  let league: League
-  let teams: Teams
-  let goals: Goals
-  let score: Score
+public struct FixtureDataResponse: Codable, Hashable, Equatable, Sendable {
+    public  let fixture: Fixture
+    public let league: League
+    public let teams: Teams
+    public  let goals: Goals
+    public let score: Score
 
-  init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.fixture = try container.decode(Fixture.self, forKey: .fixture)
     self.league = try container.decode(League.self, forKey: .league)
@@ -42,31 +42,31 @@ struct FixtureDataResponse: Codable, Hashable, Equatable {
 
   }
 
-  static func == (lhs: FixtureDataResponse, rhs: FixtureDataResponse) -> Bool {
+    public static func == (lhs: FixtureDataResponse, rhs: FixtureDataResponse) -> Bool {
     return lhs.fixture.id == rhs.fixture.id
   }
 
   // Implement the hash(into:) method
-  func hash(into hasher: inout Hasher) {
+    public  func hash(into hasher: inout Hasher) {
     hasher.combine(fixture.id)
   }
 }
 
 // MARK: - Fixture
-struct Fixture: Codable {
-  let id: Int
-  let referee: String?
-  let timezone: Timezone
-  let date: Date
-  let timestamp: Int
-  let periods: Periods
-  let venue: Venue
-  let status: Status
+public struct Fixture: Codable, Sendable{
+    public let id: Int
+    public let referee: String?
+    public let timezone: Timezone
+    public let date: Date
+    public let timestamp: Int
+    public let periods: Periods
+    public let venue: Venue
+    public let status: Status
   enum CodingKeys: String, CodingKey {
     case id, referee, timezone, date, timestamp, periods, venue, status
   }
 
-  init(from decoder: Decoder) throws {
+    public  init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
 
     id = try container.decode(Int.self, forKey: .id)
@@ -89,13 +89,13 @@ struct Fixture: Codable {
     }
   }
 
-  func getStartDate() -> String {
+    public func getStartDate() -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = "dd.MM.yyyy"  // Customize the format as needed
     return formatter.string(from: date)
   }
 
-  func timeRemaining() -> String {
+    public func timeRemaining() -> String {
     let calendar = Calendar.current
     let components = calendar.dateComponents(
       [.day, .hour, .minute, .second], from: Date(), to: date)
@@ -117,18 +117,18 @@ struct Fixture: Codable {
 }
 
 // MARK: - Periods
-struct Periods: Codable {
-  let first, second: Int?
+public struct Periods: Codable, Sendable {
+    public  let first, second: Int?
 }
 
 // MARK: - Status
-struct Status: Codable {
-  let long: Long
-  let short: Short
-  let elapsed: Int?
+public struct Status: Codable, Sendable {
+    public  let long: Long
+    public   let short: Short
+    public   let elapsed: Int?
 }
 
-enum Long: String, Codable {
+public enum Long: String, Codable, Sendable {
   case matchCancelled = "Match Cancelled"
   case matchFinished = "Match Finished"
   case matchPostponed = "Match Postponed"
@@ -151,7 +151,7 @@ enum Long: String, Codable {
   case Technicalloss = "Technical loss"
 }
 
-enum Short: String, Codable {
+public enum Short: String, Codable, Sendable {
   case TBD = "TBD"
   case NS = "NS"
   case FirstH = "1H"
@@ -172,7 +172,7 @@ enum Short: String, Codable {
   case WO = "WO"
   case LIVE = "LIVE"
 
-  func isFinish() -> Bool {
+    public  func isFinish() -> Bool {
 
     switch self {
 
@@ -198,48 +198,48 @@ enum Short: String, Codable {
   }
 }
 
-enum Timezone: String, Codable {
+public enum Timezone: String, Codable, Sendable {
   case utc = "UTC"
 }
 
 // MARK: - Venue
-struct Venue: Codable {
-  let id: Int?
-  let name, city: String?
+public struct Venue: Codable, Sendable {
+    public let id: Int?
+    public let name, city: String?
 }
 
 // MARK: - Goals
-struct Goals: Codable {
-  let home, away: Int?
+public struct Goals: Codable, Sendable {
+    public let home, away: Int?
 }
 
 // MARK: - League
-struct League: Codable {
-  let id: Int
-  let name, country: String
-  let logo: String
-  let flag: String?
-  let season: Int
-  let round: String
+public struct League: Codable, Sendable {
+    public let id: Int
+    public let name, country: String
+    public let logo: String
+    public let flag: String?
+    public let season: Int
+    public let round: String
 }
 
 // MARK: - Score
-struct Score: Codable {
-  let halftime, fulltime, extratime, penalty: Goals
+public struct Score: Codable, Sendable {
+    public  let halftime, fulltime, extratime, penalty: Goals
 }
 
 // MARK: - Teams
-struct Teams: Codable {
-  let home, away: Away
+public struct Teams: Codable, Sendable {
+    public let home, away: Away
 
 }
 
 // MARK: - Away
-struct Away: Codable {
-  let id: Int
-  let name: String
-  let logo: String
-  let winner: Bool?
+public struct Away: Codable, Sendable {
+    public  let id: Int
+    public  let name: String
+    public let logo: String
+    public let winner: Bool?
 }
 
 func getdymmyFixtureDataResponseData() -> FixtureDataResponse {

@@ -15,7 +15,7 @@ extension Date{
         return dateFormatter.string(from: self)
     }
 }
-protocol IFixtureRepository:Actor{
+public protocol IFixtureRepository:Actor{
     
     func getMatchFixtureByDate( date:Date) async throws -> PaginationModel<FixtureDataResponse>
     func getMatchFixtureByLeagueID( league:Int, season:Int) async throws -> PaginationModel<FixtureDataResponse>
