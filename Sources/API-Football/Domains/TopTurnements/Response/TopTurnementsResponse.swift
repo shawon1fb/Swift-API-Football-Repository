@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - TopTurnementsResponse
-struct TopTurnementsResponse: Codable {
+struct TopTurnementsResponse: Codable, Sendable {
  //   let status: Bool
     let data: [TurnementsData]
 
@@ -19,14 +19,14 @@ struct TopTurnementsResponse: Codable {
 }
 
 // MARK: - Datum
-struct TurnementsData: Codable, Hashable {
-    let id: Int
-    let name: String
-    let host: String
-    let type: String
-    let logo: String
+public struct TurnementsData: Codable, Hashable, Sendable {
+    public let id: Int
+    public let name: String
+    public let host: String
+    public let type: String
+    public let logo: String
  
-    let leagueID: Int
+    public let leagueID: Int
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -37,7 +37,7 @@ struct TurnementsData: Codable, Hashable {
         case leagueID = "league_id"
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
             hasher.combine(id)
             hasher.combine(name)
             hasher.combine(leagueID)

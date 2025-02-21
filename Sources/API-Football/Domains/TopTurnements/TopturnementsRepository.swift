@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol ITopTurnementsRepository:Actor{
+public protocol ITopTurnementsRepository:Actor{
     func getTopLeagues()async throws -> [TurnementsData]
     func getTopTurnements()async throws -> [TurnementsData]
 }
