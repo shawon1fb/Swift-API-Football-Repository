@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - VenuesResponse
-struct VenuesResponse: Codable {
+struct VenuesResponse: Codable, Sendable {
     let response: [VenueData]
 
     enum CodingKeys: String, CodingKey {
@@ -15,15 +15,15 @@ struct VenuesResponse: Codable {
 }
 
 // MARK: - Response
-struct VenueData: Codable {
-    let id: Int?
-    let name: String?
-    let address: String?
-    let city: String?
-    let country: String?
-    let capacity: Int?
+public struct VenueData: Codable, Sendable {
+    public let id: Int?
+    public let name: String?
+    public let address: String?
+    public let city: String?
+    public let country: String?
+    public let capacity: Int?
     let surface: String?
-    let image: String?
+    public let image: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

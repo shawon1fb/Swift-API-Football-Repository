@@ -11,7 +11,7 @@ import Foundation
 
 
 // MARK: - TeamDetailsResponse
-struct TeamDetailsResponse: Codable {
+struct TeamDetailsResponse: Codable, Sendable {
     let response: [TeamsResponse]
 
     enum CodingKeys: String, CodingKey {
@@ -20,9 +20,9 @@ struct TeamDetailsResponse: Codable {
 }
 
 // MARK: - Response
-struct TeamsResponse: Codable {
-    let team: TeamInfoData
-    let venue: VenueData
+public struct TeamsResponse: Codable, Sendable {
+    public let team: TeamInfoData
+    public let venue: VenueData
 
     enum CodingKeys: String, CodingKey {
         case team = "team"
@@ -31,14 +31,14 @@ struct TeamsResponse: Codable {
 }
 
 // MARK: - Team
-struct TeamInfoData: Codable {
-    let id: Int
-    let name: String
-    let code: String?
-    let country: String
-    let founded: Int?
-    let national: Bool
-    let logo: String
+public struct TeamInfoData: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let code: String?
+    public let country: String
+    public let founded: Int?
+    public let national: Bool
+    public let logo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

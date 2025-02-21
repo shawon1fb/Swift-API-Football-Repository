@@ -14,7 +14,7 @@ import Foundation
 import Foundation
 
 // MARK: - TeamSquadsResponse
-struct TeamSquadsResponse: Codable {
+struct TeamSquadsResponse: Codable, Sendable {
     let response: [SquadResponse]
 
     enum CodingKeys: String, CodingKey {
@@ -23,9 +23,9 @@ struct TeamSquadsResponse: Codable {
 }
 
 // MARK: - Response
-struct SquadResponse: Codable {
-    let team: SquadTeam
-    let players: [SquadPlayer]
+public struct SquadResponse: Codable, Sendable {
+    public let team: SquadTeam
+    public  let players: [SquadPlayer]
 
     enum CodingKeys: String, CodingKey {
         case team = "team"
@@ -34,13 +34,13 @@ struct SquadResponse: Codable {
 }
 
 // MARK: - Player
-struct SquadPlayer: Codable {
-    let id: Int
-    let name: String
-    let age: Int?
-    let number: Int?
-    let position: Position
-    let photo: String
+public struct SquadPlayer: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let age: Int?
+    public let number: Int?
+    public let position: Position
+    public let photo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -52,7 +52,7 @@ struct SquadPlayer: Codable {
     }
 }
 
-enum Position: String, Codable {
+public enum Position: String, Codable, Sendable {
     case attacker = "Attacker"
     case defender = "Defender"
     case goalkeeper = "Goalkeeper"
@@ -60,10 +60,10 @@ enum Position: String, Codable {
 }
 
 //// MARK: - Team
-struct SquadTeam: Codable {
-    let id: Int
-    let name: String
-    let logo: String
+public struct SquadTeam: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let logo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

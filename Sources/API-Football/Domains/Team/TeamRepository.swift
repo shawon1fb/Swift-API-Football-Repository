@@ -9,7 +9,7 @@ import Foundation
 import EasyXConnect
 
 
-protocol ITeamRepository{
+public protocol ITeamRepository:Actor{
     func getTeamByID(id:Int)async throws -> [TeamsResponse]
     func getCountryList()async->[TeamsResponse]
     func getCountryById(id:Int)async->TeamsResponse?
