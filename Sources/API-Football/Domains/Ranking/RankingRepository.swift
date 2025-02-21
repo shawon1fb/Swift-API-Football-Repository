@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol IRankingRepository: Actor{
+public protocol IRankingRepository: Actor{
     
     func getFifaRanking()async throws -> [RankingData]
     func getUefaRanking()async throws -> [RankingData]

@@ -13,7 +13,7 @@
 import Foundation
 
 // MARK: - RankingResponse
-struct RankingResponse: Codable {
+struct RankingResponse: Codable, Sendable {
     let status: Bool
     let data: [RankingData]
 
@@ -24,13 +24,13 @@ struct RankingResponse: Codable {
 }
 
 // MARK: - Datum
-struct RankingData: Codable {
-    let id: Int
-    let points: String
-    let position: Int
-    let teamID: Int
-    let teamName: String
-    let teamLogo: String
+public struct RankingData: Codable, Sendable {
+    public let id: Int
+    public let points: String
+    public let position: Int
+    public let teamID: Int
+    public let teamName: String
+    public let teamLogo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

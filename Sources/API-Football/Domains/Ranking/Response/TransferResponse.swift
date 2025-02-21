@@ -13,7 +13,7 @@
 import Foundation
 
 // MARK: - TransferResponse
-struct TransferResponse: Codable {
+struct TransferResponse: Codable, Sendable {
     let status: Bool
     let data: [TransferData]
 
@@ -24,14 +24,14 @@ struct TransferResponse: Codable {
 }
 
 // MARK: - Datum
-struct TransferData: Codable, Identifiable {
-    let id: Int
-    let playerID: Int
-    let teamID: Int
-    let player: TransferPlayer
-    let playerDetails: PlayerDetails?
-    let info: TransferInfo
-    let dealDate: String
+public struct TransferData: Codable, Identifiable, Sendable {
+    public let id: Int
+    public let playerID: Int
+    public let teamID: Int
+    public let player: TransferPlayer
+    public let playerDetails: PlayerDetails?
+    public let info: TransferInfo
+    public let dealDate: String
    
 
     enum CodingKeys: String, CodingKey {
@@ -48,10 +48,10 @@ struct TransferData: Codable, Identifiable {
 
 
 // MARK: - Info
-struct TransferInfo: Codable {
-    let date: String
-    let type: String?
-    let teams: TransferTeam
+public struct TransferInfo: Codable, Sendable {
+    public let date: String
+    public let type: String?
+    public let teams: TransferTeam
 
     enum CodingKeys: String, CodingKey {
         case date = "date"
@@ -61,9 +61,9 @@ struct TransferInfo: Codable {
 }
 
 // MARK: - Teams
-struct TransferTeam: Codable {
-    let teamsIn: TransferPlayer
-    let out: TransferPlayer
+public struct TransferTeam: Codable, Sendable {
+    public let teamsIn: TransferPlayer
+    public let out: TransferPlayer
 
     enum CodingKeys: String, CodingKey {
         case teamsIn = "in"
@@ -72,10 +72,10 @@ struct TransferTeam: Codable {
 }
 
 // MARK: - PlayerDetails
-struct TransferPlayer: Codable {
-    let id: Int
-    let name: String
-    let logo: String
+public struct TransferPlayer: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let logo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -84,18 +84,18 @@ struct TransferPlayer: Codable {
     }
 }
 // MARK: - PlayerDetails
-struct PlayerDetails: Codable {
-    let id: Int
-    let name: String
-    let firstname: String?
-    let lastname: String?
-    let age: Int
-    let birth: PlayerBirth
-    let nationality: String?
-    let height: String?
-    let weight: String?
-    let injured: Bool
-    let photo: String
+public struct PlayerDetails: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let firstname: String?
+    public let lastname: String?
+    public let age: Int
+    public let birth: PlayerBirth
+    public let nationality: String?
+    public let height: String?
+    public let weight: String?
+    public let injured: Bool
+    public let photo: String
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -113,10 +113,10 @@ struct PlayerDetails: Codable {
 }
 
 // MARK: - Birth
-struct PlayerBirth: Codable {
-    let date: String?
-    let place: String?
-    let country: String?
+public struct PlayerBirth: Codable, Sendable {
+    public let date: String?
+    public let place: String?
+    public let country: String?
 
     enum CodingKeys: String, CodingKey {
         case date = "date"
