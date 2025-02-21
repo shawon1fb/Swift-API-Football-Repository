@@ -30,13 +30,13 @@ struct FixtureLineUPResponse: Codable, Sendable {
 }
 
 // MARK: - Response
-struct LineUpsData: Codable, Sendable {
-    let team: Team
-    let coach: Coach
-    let formation: String?
-    let startXI, substitutes: [StartXi]
+public struct LineUpsData: Codable, Sendable {
+    public let team: Team
+    public let coach: Coach
+    public let formation: String?
+    public let startXI, substitutes: [StartXi]
     
-    func getSortedStartXI()->[StartXi]{
+    public func getSortedStartXI()->[StartXi]{
         var list = startXI
         list =  list.sorted { a, b in
             (a.player.grid ?? "" ) < (b.player.grid ?? "")
@@ -44,7 +44,7 @@ struct LineUpsData: Codable, Sendable {
         return list
     }
     
-    func getFormationList() ->[Int]{
+    public func getFormationList() ->[Int]{
         
         var list:[Int]=[]
         
@@ -64,29 +64,29 @@ struct LineUpsData: Codable, Sendable {
 }
 
 // MARK: - Coach
-struct Coach: Codable, Sendable {
-    let id: Int?
-    let name: String?
-    let photo: String?
+public struct Coach: Codable, Sendable {
+    public let id: Int?
+    public let name: String?
+    public let photo: String?
 }
 
 // MARK: - StartXi
-struct StartXi: Codable, Sendable {
+public struct StartXi: Codable, Sendable {
     
-    let player: Player
+    public let player: Player
     
 }
 
 // MARK: - Player
-struct Player: Codable, Sendable {
-    let id: Int
-    let name: String
-    let number: Int?
-    let pos: Pos?
-    let grid: String?
+public struct Player: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let number: Int?
+    public let pos: Pos?
+    public let grid: String?
 }
 
-enum Pos: String, Codable, Sendable {
+public enum Pos: String, Codable, Sendable {
     case d = "D"
     case f = "F"
     case g = "G"

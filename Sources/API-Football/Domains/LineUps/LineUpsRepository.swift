@@ -9,7 +9,7 @@ import Foundation
 import EasyXConnect
 
 
-protocol ILineUPRepository: Actor{
+public protocol ILineUPRepository: Actor{
     func getLineUps(fixtureId: Int)async throws -> [LineUpsData]
 }
 
