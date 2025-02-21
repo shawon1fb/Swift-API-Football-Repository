@@ -109,10 +109,10 @@ enum Pos: String, Codable, Sendable {
 }
 
 // MARK: - Team
-struct Team: Codable, Sendable {
-    let id: Int
-    let name: String
-    let logo: String
+public struct Team: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let logo: String
     //  let colors: JSONNull?
 }
 

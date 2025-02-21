@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - FixtureKeyEventsResponse
-struct FixtureKeyEventsResponse: Codable {
+struct FixtureKeyEventsResponse: Codable, Sendable {
   
     let response: [FixtureKeyEventsData]
 
@@ -18,14 +18,14 @@ struct FixtureKeyEventsResponse: Codable {
 
 
 // MARK: - Response
-struct FixtureKeyEventsData: Codable {
-    let time: Time
-    let team: Team
-    let player: Assist
-    let assist: Assist
-    let type: String
-    let detail: String
-    let comments: String?
+public struct FixtureKeyEventsData: Codable, Sendable  {
+    public  let time: Time
+    public let team: Team
+    public let player: Assist
+    public let assist: Assist
+    public  let type: String
+    public let detail: String
+    public let comments: String?
 
     enum CodingKeys: String, CodingKey {
         case time = "time"
@@ -39,9 +39,9 @@ struct FixtureKeyEventsData: Codable {
 }
 
 // MARK: - Assist
-struct Assist: Codable {
-    let id: Int?
-    let name: String?
+public struct Assist: Codable, Sendable  {
+    public let id: Int?
+    public let name: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -51,16 +51,16 @@ struct Assist: Codable {
 
 
 // MARK: - Time
-struct Time: Codable {
-    let elapsed: Elapsed
-    let extra: Elapsed?
+public struct Time: Codable, Sendable  {
+    public  let elapsed: Elapsed
+    public  let extra: Elapsed?
 }
 
-enum Elapsed: Codable {
+public  enum Elapsed: Codable, Sendable  {
     case integer(Int)
     case string(String)
     
-    init(from decoder: Decoder) throws {
+    public  init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let x = try? container.decode(Int.self) {
             self = .integer(x)
@@ -73,7 +73,7 @@ enum Elapsed: Codable {
         throw DecodingError.typeMismatch(Elapsed.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Elapsed"))
     }
     
-    func encode(to encoder: Encoder) throws {
+    public   func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .integer(let x):
