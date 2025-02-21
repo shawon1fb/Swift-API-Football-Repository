@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol IVenuesRepository: Actor{
+public protocol IVenuesRepository: Actor{
     
     func getVenueByID(id:Int) async throws -> VenueData
     func getVenueByCountry(name:String) async throws -> [VenueData]
