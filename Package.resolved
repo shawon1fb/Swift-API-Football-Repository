@@ -1,0 +1,15 @@
+{
+  "originHash" : "27564ea56da869b547bd37ff5d88ed529e00b1933422f1657c32c12d43697ff7",
+  "pins" : [
+    {
+      "identity" : "easyxconnect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shawon1fb/EasyXConnect.git",
+      "state" : {
+        "revision" : "42cff6e4a494c49272afd8691da12334b5f69f5d",
+        "version" : "2.2.1"
+      }
+    }
+  ],
+  "version" : 3
+}
