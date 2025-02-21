@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol ITopPerformersRepository:Actor{
+public protocol ITopPerformersRepository: Actor{
     
     func getTopScorer(league: Int, season:Int)async throws -> [PerformersResponse]
     func getTopAssist(league: Int, season:Int)async throws -> [PerformersResponse]
