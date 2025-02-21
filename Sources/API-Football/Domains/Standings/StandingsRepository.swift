@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol IStandingRepository{
+public protocol IStandingRepository{
     
     func getStandingByLeagueAndSeason(league:Int , season: Int)async throws -> [Standing]
 }

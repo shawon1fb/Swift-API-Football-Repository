@@ -1,61 +1,61 @@
 import Foundation
 
 // MARK: - LeagueStandingsResponse
-struct LeagueStandingsResponse: Codable {
+struct LeagueStandingsResponse: Codable,Sendable {
     let response: [StandingResponse]
 }
 
 // MARK: - Response
-struct StandingResponse: Codable {
-    let league: StandingLeague
+public struct StandingResponse: Codable, Sendable {
+    public let league: StandingLeague
 }
 
 // MARK: - League
-struct StandingLeague: Codable {
-    let id: Int
-    let name: String
-    let country: String
-    let logo: String
-    let flag: String?
-    let season: Int
-    let standings: [[Standing]]
+public struct StandingLeague: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let country: String
+    public let logo: String
+    public let flag: String?
+    public let season: Int
+    public let standings: [[Standing]]
 }
 
 
 
 // MARK: - Standing
-struct Standing: Codable , Hashable, Equatable {
-    let rank: Int
-    let team: StandingTeam
-    let points, goalsDiff: Int
-    let group: String
-    let form: String?
-    let status: String?
-    let description: String?
-    let all : All
+public struct Standing: Codable , Hashable, Equatable, Sendable {
+    public let rank: Int
+    public let team: StandingTeam
+    public let points, goalsDiff: Int
+    public let group: String
+    public let form: String?
+    public let status: String?
+    public let description: String?
+    public let all : All
 //    let home: All
 //    let away: All
     //let update: Date
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(team.id)
     }
-    static func ==(lhs: Standing, rhs: Standing) -> Bool {
+    static public func ==(lhs: Standing, rhs: Standing) -> Bool {
         return lhs.rank == rhs.rank && lhs.team.id == rhs.team.id
         
     }
 }
 
 // MARK: - All
-struct All: Codable {
-    let win, draw, lose: Int
-    let played: Int?
-    let goals: StandingGoals
+public struct All: Codable, Sendable {
+    public let win, draw, lose: Int
+    public let played: Int?
+    public let goals: StandingGoals
 }
 
 // MARK: - Goals
-struct StandingGoals: Codable {
-    let goalsFor, against: Int
+public struct StandingGoals: Codable, Sendable {
+    public let goalsFor, against: Int
 
     enum CodingKeys: String, CodingKey {
         case goalsFor = "for"
@@ -66,10 +66,10 @@ struct StandingGoals: Codable {
 
 
 // MARK: - Team
-struct StandingTeam: Codable {
-    let id: Int
-    let name: String
-    let logo: String
+public struct StandingTeam: Codable, Sendable {
+    public let id: Int
+    public let name: String
+    public let logo: String
 }
 
 
