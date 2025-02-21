@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - TeamStatistics
-struct TeamStaisticsResponse: Codable {
+struct TeamStaisticsResponse: Codable, Sendable {
 
     let response: [StatisticsResponse]
 
@@ -18,9 +18,9 @@ struct TeamStaisticsResponse: Codable {
 
 
 // MARK: - Response
-struct StatisticsResponse: Codable {
-    let team: Team
-    let statistics: [Statistic]
+public struct StatisticsResponse: Codable, Sendable {
+    public let team: Team
+    public let statistics: [Statistic]
 
     enum CodingKeys: String, CodingKey {
         case team = "team"
@@ -29,9 +29,9 @@ struct StatisticsResponse: Codable {
 }
 
 // MARK: - Statistic
-struct Statistic: Codable {
-    let type: String
-    let value: Value
+public struct Statistic: Codable, Sendable {
+    public let type: String
+    public let value: Value
 
     enum CodingKeys: String, CodingKey {
         case type = "type"
@@ -39,12 +39,12 @@ struct Statistic: Codable {
     }
 }
 
-enum Value: Codable, CustomStringConvertible {
+public enum Value: Codable, CustomStringConvertible, Sendable {
     case integer(Int)
     case string(String)
     case null
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let x = try? container.decode(Int.self) {
             self = .integer(x)
@@ -61,7 +61,7 @@ enum Value: Codable, CustomStringConvertible {
         throw DecodingError.typeMismatch(Value.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Value"))
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .integer(let x):
@@ -73,7 +73,7 @@ enum Value: Codable, CustomStringConvertible {
         }
     }
     
-    var description: String {
+    public var description: String {
             switch self {
             case .integer(let intValue):
                 return String(intValue)

@@ -8,7 +8,7 @@
 import Foundation
 import EasyXConnect
 
-protocol IStatisticsRepository: Actor{
+public protocol IStatisticsRepository: Actor{
     
     func getStatics(fixture: Int )async throws ->[StatisticsResponse]
     
